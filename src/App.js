@@ -1,62 +1,53 @@
-import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
-import firebase from './firebase';
+import React, {Component} from 'react'
+import ReactDOM from 'react-dom'
+import firebase from './firebase'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEnvelope, faKey } from '@fortawesome/free-solid-svg-icons'
+import Signup from './Components/signup'
+import { Container } from 'react-bootstrap'
+import { AuthProvider } from './contexts/AuthContext'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import Dashboard from './Components/dashboad'
+import Login from './Components/login'
+import PrivateRoute from './Components/PrivateRoute'
+
+
 const database = firebase.database().ref('speed');
+
 class App extends Component {
-  constructor(props){
-    super(props)
-    
-    this.state = {
-      name: 10,
-      phone: 10,
-      array: []
-
-    }
-  }
-
-  componentDidMount() {
-
-    database.on('child_added', snap => {
-
-      const map = snap.val();
-      this.setState({
-        name: map.userName,
-        phone: map.userPhone,
-        array: [...this.state.array, map]
-      })
-      console.log(this.state.array)
-    })
-  }
-  activateLasers(){
-    console.log("test")
-    var newItem = { userName: 'testmaxjakedylan', userPhone: 54535 }
-    firebase.database().ref('speed').push(newItem);
-    
-  }
-  function2(){
-    database.once('value', snap => {
-
-      for(let i = 0; i < 3; i++){
-        console.log(snap.child("userName"));
-      }
-    })
-  }
+//  activateLasers = (email, firstName, lastName, password) =>{
+//       var bcrypt = require('bcryptjs');
+//       var salt = bcrypt.genSaltSync(10);
+//       var hash = bcrypt.hashSync(password, salt);
+//       console.log("test")
+//       var newItem = { emailadres: email, voornaam: firstName, achternaam: lastName, wachtwoord: hash }
+//        firebase.database().ref('speed').push(newItem);
+//    }
   render(){
     return (
       <div>
-        <button onClick={this.function2}>dsdsds</button>
-
-        <h1>The value is {this.state.name}</h1>
-        <button onClick={this.activateLasers}>
-          Activate Lasers
-        </button>
+          <Container className="d-flex align-items-center justify-content-center" style={{ minheight: "100vh" }}>
+              <div className="w-100" style={{ maxWidth: '500px' }}>
+                  <Router>
+                      <AuthProvider>
+                          <Switch>
+                              <PrivateRoute exact path="/" component={Dashboard}/>
+                              <Route path="/signup" component={Signup} />
+                              <Route path="/login" component={Login} />
+                          </Switch> 
+                      </AuthProvider>
+                  </Router>
+                  
+              </div>
+          </Container>
       </div>
-    )
+   );
+    
   }
 }
 
 ReactDOM.render(
-  <App/>,
+  <App />,
   document.getElementById('root')
 );
 
