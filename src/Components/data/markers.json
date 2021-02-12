@@ -1,0 +1,100 @@
+{
+    "markers" : [
+        {
+            "id"     : 0,
+            "sender" : "Gerard van de Burg",
+            "desc"   : "Ik zit thuis in quarantaine en kan de deur niet uit. Wie wil mij helpen met de boodschappen?",
+            "lat"    : 52.072925,
+            "lng"    : 5.098057,
+            "action" : 0 
+        },
+        {
+            "id"     : 1,
+            "sender" : "Angela van Grinsven",
+            "desc"   : "Ik zou graag met iemand willen wandelen.",
+            "lat"    : 52.073888,
+            "lng"    : 5.101365,
+            "action" : 4 
+        },
+        {
+            "id"     : 2,
+            "sender" : "Ella Verhoeven",
+            "desc"   : "Wie zou (tegen betaling) voor mij boodschappen willen doen?",
+            "lat"    : 52.078022,
+            "lng"    : 5.101527,
+            "action" : 0 
+        },
+        {
+            "id"     : 3,
+            "sender" : "Corrie van der Tak",
+            "desc"   : "Ik heb eergisteren een nieuwe kunstheup gekregen. Zou iemand mij kunnen helpen met boodschappen doen?",
+            "lat"    : 52.080930,
+            "lng"    : 5.146658,
+            "action" : 0 
+        },
+        {
+            "id"     : 4,
+            "sender" : "Heino Fels",
+            "desc"   : "Alleen de hond uitlaten is saai. Wie loopt met ons mee?",
+            "lat"    : 52.065262,
+            "lng"    : 5.133680,
+            "action" : 3 
+        },
+        {
+            "id"     : 5,
+            "sender" : "Gijs van Beusekom",
+            "desc"   : "Fitte kerel zoekt fit maatje (man/vrouw) om mee hard te lopen.",
+            "lat"    : 52.067847,
+            "lng"    : 5.080615,
+            "action" : 2 
+        },
+        {
+            "id"     : 6,
+            "sender" : "Stefanie van Driel",
+            "desc"   : "Burn-out ligt op de loer. Wie wil met mij wandelen om even het hoofd leeg te maken?",
+            "lat"    : 52.070749,
+            "lng"    : 5.077826,
+            "action" : 4 
+        },
+        {
+            "id"     : 7,
+            "sender" : "Luuk Baars",
+            "desc"   : "Ben aan het revalideren. Het advies is om veel te fietsen. Wie doet mee?",
+            "lat"    : 52.079822,
+            "lng"    : 5.092937,
+            "action" : 1 
+        }
+    ],
+    "actions": [
+        {
+            "id"       : 0,
+            "action"   : "Boodschappen doen",
+            "filename" : "boodschappendoen.svg",
+            "scale"    : 1
+        },
+        {
+            "id"       : 1,
+            "action"   : "Fietsen",
+            "filename" : "fietsen.svg",
+            "scale"    : 1
+        },
+        {
+            "id"       : 2,
+            "action"   : "Hardlopen",
+            "filename" : "hardlopen.svg",
+            "scale"    : 1
+        },
+        {
+            "id"       : 3,
+            "action"   : "Hond uitlaten",
+            "filename" : "honduitlaten.svg",
+            "scale"    : 1
+        },
+        {
+            "id"       : 4,
+            "action"   : "Wandelen",
+            "filename" : "wandelen.svg",
+            "scale"    : 1
+        }
+    ]        
+}

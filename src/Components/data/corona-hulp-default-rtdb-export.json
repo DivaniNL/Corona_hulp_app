@@ -1,0 +1,98 @@
+{
+  "actions" : [ 
+    {
+    "action" : "Boodschappen doen",
+    "filename" : "boodschappendoen.svg",
+    "id" : 0,
+    "scale" : 1
+  }, {
+    "action" : "Fietsen",
+    "filename" : "fietsen.svg",
+    "id" : 1,
+    "scale" : 1
+  }, {
+    "action" : "Hardlopen",
+    "filename" : "hardlopen.svg",
+    "id" : 2,
+    "scale" : 1
+  }, {
+    "action" : "Hond uitlaten",
+    "filename" : "honduitlaten.svg",
+    "id" : 3,
+    "scale" : 1
+  }, {
+    "action" : "Wandelen",
+    "filename" : "wandelen.svg",
+    "id" : 4,
+    "scale" : 1
+  } ],
+  "markers" : [ {
+    "action" : 0,
+    "desc" : "Ik zit thuis in quarantaine en kan de deur niet uit. Wie wil mij helpen met de boodschappen?",
+    "id" : 0,
+    "lat" : 52.072925,
+    "lng" : 5.098057,
+    "sender" : "Gerard van de Burg"
+  }, {
+    "action" : 4,
+    "desc" : "Ik zou graag met iemand willen wandelen.",
+    "id" : 1,
+    "lat" : 52.073888,
+    "lng" : 5.101365,
+    "sender" : "Angela van Grinsven"
+  }, {
+    "action" : 0,
+    "desc" : "Wie zou (tegen betaling) voor mij boodschappen willen doen?",
+    "id" : 2,
+    "lat" : 52.078022,
+    "lng" : 5.101527,
+    "sender" : "Ella Verhoeven"
+  }, {
+    "action" : 0,
+    "desc" : "Ik heb eergisteren een nieuwe kunstheup gekregen. Zou iemand mij kunnen helpen met boodschappen doen?",
+    "id" : 3,
+    "lat" : 52.08093,
+    "lng" : 5.146658,
+    "sender" : "Corrie van der Tak"
+  }, {
+    "action" : 3,
+    "desc" : "Alleen de hond uitlaten is saai. Wie loopt met ons mee?",
+    "id" : 4,
+    "lat" : 52.065262,
+    "lng" : 5.13368,
+    "sender" : "Heino Fels"
+  }, {
+    "action" : 2,
+    "desc" : "Fitte kerel zoekt fit maatje (man/vrouw) om mee hard te lopen.",
+    "id" : 5,
+    "lat" : 52.067847,
+    "lng" : 5.080615,
+    "sender" : "Gijs van Beusekom"
+  }, {
+    "action" : 4,
+    "desc" : "Burn-out ligt op de loer. Wie wil met mij wandelen om even het hoofd leeg te maken?",
+    "id" : 6,
+    "lat" : 52.070749,
+    "lng" : 5.077826,
+    "sender" : "Stefanie van Driel"
+  }, {
+    "action" : 1,
+    "desc" : "Ben aan het revalideren. Het advies is om veel te fietsen. Wie doet mee?",
+    "id" : 7,
+    "lat" : 52.079822,
+    "lng" : 5.092937,
+    "sender" : "Luuk Baars"
+  } ],
+  "user" : {
+    "-MTFtRmatncYturyWb44" : {
+      "emailadress" : "test123@test123.com",
+      "fullname" : "123",
+      "userImage" : "test"
+    },
+    "-MTFug9zJ1Z3xW_3qqPd" : {
+      "emailadress" : "12455646@gmail.com",
+      "fullname" : "max van Gopr",
+      "userImage" : "C:\\fakepath\\sus_msg.PNG"
+    }
+  }
+}

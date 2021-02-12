@@ -28,8 +28,8 @@ export default function Login() {
         };
     }
     return (
-        <div>
-            <Card className="p-3">
+        <div className="">
+            <Card  className="p-3 ">
                 <Card.Body>
                     <h2 className="text-center mb-4">Log In</h2>
                     {error && <Alert variant="danger">{error}</Alert>}

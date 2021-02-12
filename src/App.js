@@ -12,35 +12,31 @@ import Login from './Components/login'
 import PrivateRoute from './Components/PrivateRoute'
 
 
-const database = firebase.database().ref('speed');
+const database = firebase.database().ref('markers');
 
 class App extends Component {
-//  activateLasers = (email, firstName, lastName, password) =>{
-//       var bcrypt = require('bcryptjs');
-//       var salt = bcrypt.genSaltSync(10);
-//       var hash = bcrypt.hashSync(password, salt);
-//       console.log("test")
-//       var newItem = { emailadres: email, voornaam: firstName, achternaam: lastName, wachtwoord: hash }
-//        firebase.database().ref('speed').push(newItem);
-//    }
+
+ activateLasers = (actioni, desci, idi, lati, lngi, senderi) =>{
+      // var bcrypt = require('bcryptjs');
+      // var salt = bcrypt.genSaltSync(10);
+      // var hash = bcrypt.hashSync(password, salt);
+      console.log("test")
+      var newItem = { action: actioni, desc: desci, id: idi, lat: lati, lng: lngi, sender: senderi }
+       firebase.database().ref('actions').push(newItem);
+   }
   render(){
     return (
-      <div>
-          <Container className="d-flex align-items-center justify-content-center" style={{ minheight: "100vh" }}>
-              <div className="w-100" style={{ maxWidth: '500px' }}>
-                  <Router>
-                      <AuthProvider>
-                          <Switch>
-                              <PrivateRoute exact path="/" component={Dashboard}/>
-                              <Route path="/signup" component={Signup} />
-                              <Route path="/login" component={Login} />
-                          </Switch> 
-                      </AuthProvider>
-                  </Router>
-                  
-              </div>
-          </Container>
-      </div>
+          <div className="container-fluid p-0" >
+                <Router>
+                    <AuthProvider>
+                        <Switch>
+                            <PrivateRoute exact path="/" component={Dashboard} abc={this.state}/>
+                            <Route path="/signup" component={Signup} />
+                            <Route path="/login" component={Login} />
+                        </Switch> 
+                    </AuthProvider>
+                </Router>
+          </div>
    );
     
   }
