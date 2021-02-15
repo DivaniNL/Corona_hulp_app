@@ -164,7 +164,7 @@ function showPosition(position) {
                         setSelectedMarker(null);
                     }}
                 >
-                    <div style={{ width: '180px', overflow: 'hidden' }}>
+                    <div style={{ width: '220px', overflow: 'hidden' }}>
                         <h2>{getAction(selectedMarker.action)}</h2>
                         <p>{selectedMarker.sender}</p>
                         <p>{selectedMarker.desc}</p>
