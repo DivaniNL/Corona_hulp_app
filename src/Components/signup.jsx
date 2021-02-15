@@ -11,10 +11,10 @@ export default function Signup() {
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
     const NameRef = useRef();
-    const ImgUrlRef = useRef();
+    //const ImgUrlRef = useRef();
     const { signup } = useAuth();
-    const [error, setError] = useState('');
-    const [loading, setLoading] = useState(false);
+    const [ error, setError ] = useState('');
+    const [ loading, setLoading ] = useState(false);
     const history = useHistory();
 
     async function handleSubmit(e) {
@@ -26,10 +26,13 @@ export default function Signup() {
             setLoading(true);
             
             await signup(emailRef.current.value, passwordRef.current.value);
-            // saveUserInfoToDb(emailRef.current.value, NameRef.current.value, ImgUrlRef.current.value);
+
+            
+            saveUserInfoToDb(emailRef.current.value, NameRef.current.value);
             history.push("/");
+            
         } catch {
-            setError('failed to create an account');
+            setError("failed to creat4e an accoutn");
         }
         setLoading(false);
     }
@@ -37,12 +40,14 @@ export default function Signup() {
         console.log(event)
     }
     
-    // function saveUserInfoToDb(email, name, ImgUrl ){
-    //     let newUser = { emailadress: email, fullname: name, userImage: ImgUrl}
-    //     firebase.database().ref('user').push(newUser).then(() => {
-    //         console.log("yes");
-    //     });
-    // }
+    function saveUserInfoToDb(email, name ){
+        console.log("aangekomen bij functie");
+        let newUser = { emailadress: email, fullname: name}
+        console.log(newUser);
+        firebase.database().ref('user').push(newUser).then(() => {
+            console.log("yes");
+        });
+     }
 
     return (
         <div>
@@ -60,10 +65,10 @@ export default function Signup() {
                         <Form.Label>voledige naam</Form.Label>
                         <Form.Control type="text" ref={NameRef} required />
                     </Form.Group>
-                    <Form.Group id="naam">
+                    {/* <Form.Group id="naam">
                         <Form.Label>user image</Form.Label>
                         <Form.Control type="file" onChange={fileSelectHandler()} required />
-                    </Form.Group>
+                    </Form.Group> */}
                     <Form.Group id="password">
                         <Form.Label>Password</Form.Label>
                         <Form.Control type="password" ref={passwordRef}  required />
