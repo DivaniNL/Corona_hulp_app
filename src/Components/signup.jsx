@@ -29,7 +29,7 @@ export default function Signup() {
             await signup(emailRef.current.value, passwordRef.current.value);
 
             
-            saveUserInfoToDb(emailRef.current.value, NameRef.current.value);
+            saveUserInfoToDb(emailRef.current.value, NameRef.current.value, imageRef.current.files[0].name);
             // history.push("/");
             
         } catch {
@@ -37,35 +37,27 @@ export default function Signup() {
         }
         setLoading(false);
     }
-    // function fileSelectHandler(event) {
 
-    //     // uploadTask
-    
-    // }
     function handleUpload() {
-        var storageRef = firebase.storage().ref("images");
-
-
-        // setFile(imageRef.current.value);
-        let filename = imageRef.current.value;
-        sessionStorage.setItem("avatar", filename.replace('C:\\fakepath\\',''));
-        var thisRef = storageRef.child(filename.replace('C:\\fakepath\\',''));
-        console.log(thisRef)
-        thisRef.put(filename);
-        return filename;
+        const file = imageRef.current.files[0]
+        const storageRef = firebase.storage().ref("images")
+        const fileRef = storageRef.child(file.name)
+        fileRef.put(file).then(() => {
+            console.log(file)
+        })
         
     }   
  
-    function saveUserInfoToDb(email, name){
+    function saveUserInfoToDb(email, name, afbeelding){
         console.log("aangekomen bij functie");
-        let newUser = { emailadress: email, fullname: name, image: sessionStorage.getItem('avatar')}
+        let newUser = { emailadress: email, fullname: name, image: afbeelding}
         console.log(newUser);
         firebase.database().ref('user').push(newUser).then(() => {
             console.log("yes");
         });
 
     }
-    
+
 
     return (
         <div>

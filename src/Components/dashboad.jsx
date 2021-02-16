@@ -109,16 +109,31 @@ function showPosition(position) {
    function renderOproepen(){
 
         var own_markers = firebase.database().ref("markers")
+        let table = document.createElement("table");
         own_markers.on("value", function (snapshot) {
             snapshot.forEach(function (childSnapshot) {
                 var childData = childSnapshot.val();
 
                 console.log(sessionStorage.getItem('username'));
+
+                document.getElementById("demo").appendChild(table)
                 if(sessionStorage.getItem('username') == childData.sender){
                     console.log("je hebt een item op jouw naam");
                     var descs = childData.desc;
-                    document.getElementById("demo").innerHTML += "<p>" + descs + "</p>";                 
+                    var sender = childData.sender;
+                    let tr = document.createElement("tr");
+                    table.appendChild(tr);
+
+                    let desctd = document.createElement("td");
+                    tr.appendChild(desctd);
+
+                    let sendertd = document.createElement("td");
+                    tr.appendChild(sendertd);
+
+                    desctd.innerHTML = descs;   
+                    sendertd.innerHTML = sender;        
                 }
+                
                 POIOwn.push(childData);
                 console.log(ownitems)
 
