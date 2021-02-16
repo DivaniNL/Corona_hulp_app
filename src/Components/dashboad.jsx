@@ -73,8 +73,10 @@ function showPosition(position) {
                 if(childData.emailadress == currentUser.email){
                     usertest = childData.fullname;
                     // console.log(currentUser);
+                    console.log(childData.image);
                     sessionStorage.setItem('username', childData.fullname);
                     sessionStorage.setItem('id', currentUser.uid);
+                    sessionStorage.setItem('image', childData.image);
                 } else {
                     // console.log("123")
                 }
@@ -101,7 +103,8 @@ function showPosition(position) {
           } else { 
           }
         //   console.log(usertest);
-        let newMarker = { action: category_sended, id: currentUser.uid , desc: desc_sended, lat: parseFloat(sessionStorage.getItem('lati')), lng: parseFloat(sessionStorage.getItem('long')), sender: sessionStorage.getItem('username') }
+        console.log(sessionStorage.getItem('image'));
+        let newMarker = { action: category_sended, image: sessionStorage.getItem('image'), id: currentUser.uid , desc: desc_sended, lat: parseFloat(sessionStorage.getItem('lati')), lng: parseFloat(sessionStorage.getItem('long')), sender: sessionStorage.getItem('username') }
         firebase.database().ref('markers').push(newMarker).then(() => {
 
         });
@@ -145,13 +148,18 @@ function showPosition(position) {
         
 
     }
-    function postImage(){
+    function postImage(current){
         const storageRef = firebase.storage().ref("/");
-        storageRef.child(`images/pp.jpg`).getDownloadURL()
+        storageRef.child(`images/${current}`).getDownloadURL()
         .then((url) => {
             let avatar = document.createElement("img");
             avatar.setAttribute('src', url);
-            document.getElementById("demo").appendChild(avatar);
+            avatar.classList.add("popup_avatar");
+            document.getElementById("avatar_div").appendChild(avatar);
+            if(document.getElementById("avatar_div").children.length > 1){
+            document.getElementById("avatar_div").removeChild(document.getElementById("avatar_div").firstChild);
+            }
+            
         })
 
         
@@ -216,14 +224,17 @@ function showPosition(position) {
                         lng: selectedMarker.lng
                     }}
                     onCloseClick={() => {
+
                         setSelectedMarker(null);
                     }}
                 >
-                    <div style={{ width: '220px', overflow: 'hidden' }}>
+                    <div id="popup" style={{ width: '220px', overflow: 'hidden' }}>
                         <h2>{getAction(selectedMarker.action)}</h2>
                         <p>{selectedMarker.sender}</p>
                         <p>{selectedMarker.desc}</p>
-                        {postImage()}
+                        <div id="avatar_div">
+                        {postImage(selectedMarker.image)}
+                        </div>
                     </div>
                 </InfoWindow>
             )}

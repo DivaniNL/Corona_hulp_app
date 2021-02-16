@@ -31,6 +31,7 @@ export default function Signup() {
             
             saveUserInfoToDb(emailRef.current.value, NameRef.current.value, imageRef.current.files[0].name);
             // history.push("/");
+            window.location.href = "/";
             
         } catch {
             setError("failed to create an accoutn");

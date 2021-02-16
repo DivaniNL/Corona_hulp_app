@@ -14,3 +14,7 @@ html,body{
   justify-content: center;
 
 }
+#popup  #avatar_div .popup_avatar{
+
+  width: 100%;
+}
