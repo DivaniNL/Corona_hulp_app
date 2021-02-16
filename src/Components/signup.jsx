@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Form, Button, Card, Alert } from 'react-bootstrap';
 import { useAuth } from '../contexts/AuthContext';
 import { Link, useHistory } from 'react-router-dom';
-import firebase from './../firebase';
+import firebase, {storage} from './../firebase';
 
 const database = firebase.database().ref('user');
 
@@ -11,11 +11,12 @@ export default function Signup() {
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
     const NameRef = useRef();
-    //const ImgUrlRef = useRef();
+    const imageRef = useRef();
     const { signup } = useAuth();
     const [ error, setError ] = useState('');
     const [ loading, setLoading ] = useState(false);
     const history = useHistory();
+    const [file, setFile] = useState("");
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -29,25 +30,42 @@ export default function Signup() {
 
             
             saveUserInfoToDb(emailRef.current.value, NameRef.current.value);
-            history.push("/");
+            // history.push("/");
             
         } catch {
-            setError("failed to creat4e an accoutn");
+            setError("failed to create an accoutn");
         }
         setLoading(false);
     }
-    function fileSelectHandler(event) {
-        console.log(event)
-    }
+    // function fileSelectHandler(event) {
+
+    //     // uploadTask
     
-    function saveUserInfoToDb(email, name ){
+    // }
+    function handleUpload() {
+        var storageRef = firebase.storage().ref("images");
+
+
+        // setFile(imageRef.current.value);
+        let filename = imageRef.current.value;
+        sessionStorage.setItem("avatar", filename.replace('C:\\fakepath\\',''));
+        var thisRef = storageRef.child(filename.replace('C:\\fakepath\\',''));
+        console.log(thisRef)
+        thisRef.put(filename);
+        return filename;
+        
+    }   
+ 
+    function saveUserInfoToDb(email, name){
         console.log("aangekomen bij functie");
-        let newUser = { emailadress: email, fullname: name}
+        let newUser = { emailadress: email, fullname: name, image: sessionStorage.getItem('avatar')}
         console.log(newUser);
         firebase.database().ref('user').push(newUser).then(() => {
             console.log("yes");
         });
-     }
+
+    }
+    
 
     return (
         <div>
@@ -65,6 +83,10 @@ export default function Signup() {
                         <Form.Label>voledige naam</Form.Label>
                         <Form.Control type="text" ref={NameRef} required />
                     </Form.Group>
+                    <Form.Group id="file">
+                        <Form.Label>file</Form.Label>
+                        <Form.Control ref={imageRef} type="file" />
+                    </Form.Group>
                     {/* <Form.Group id="naam">
                         <Form.Label>user image</Form.Label>
                         <Form.Control type="file" onChange={fileSelectHandler()} required />
@@ -77,7 +99,7 @@ export default function Signup() {
                         <Form.Label>Password Confirmation</Form.Label>
                         <Form.Control type="password" ref={passwordConfirmRef} required />
                     </Form.Group>
-                    <Button disabled={loading} type="submit" className="w-100">Sign Up</Button>
+                    <Button disabled={loading} onClick={handleUpload} type="submit" className="w-100">Sign Up</Button>
                 </Form>
             </Card>
             <div>

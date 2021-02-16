@@ -12,12 +12,14 @@ export default function Dashboard() {
     const [loading, setLoading] = useState(false)
     const history = useHistory();
     let POIlist = [];
+    let POIOwn = [];
     const senderRef = useRef();
     const descRef = useRef();
     const catRef = useRef();
     let lati;
     let long;
     let test;
+    const ownitems = [];
     var usertest = "";
  
     async function handleLogout() {
@@ -80,6 +82,8 @@ function showPosition(position) {
             });
 
         })
+        
+
         // firebase.database.ref("user").orderByChild("emailadress").equalTo(currentUser.email).once("value", function (snapshot) {
         //  snapshot.forEach(function(schildSnapShot){
         //      var cellNum=schildSnapShot.val().CellNum;
@@ -102,6 +106,30 @@ function showPosition(position) {
 
         });
     }
+   function renderOproepen(){
+
+        var own_markers = firebase.database().ref("markers")
+        own_markers.on("value", function (snapshot) {
+            snapshot.forEach(function (childSnapshot) {
+                var childData = childSnapshot.val();
+
+                console.log(sessionStorage.getItem('username'));
+                if(sessionStorage.getItem('username') == childData.sender){
+                    console.log("je hebt een item op jouw naam");
+                    var descs = childData.desc;
+                    document.getElementById("demo").innerHTML += "<p>" + descs + "</p>";                 
+                }
+                POIOwn.push(childData);
+                console.log(ownitems)
+
+            });
+            
+        })
+
+        return ownitems;
+        
+
+    }
     function makeMarker(e) {
         e.preventDefault()
 
@@ -112,7 +140,8 @@ function showPosition(position) {
                 setError('');
                 setLoading(true);
                 await sendMarker( descRef.current.value, catRef.current.value)
-                history.push("/")
+                history.push("/");
+                window.location.reload();
             } catch {
                 setError('failed to make a marker')
             }
@@ -184,8 +213,12 @@ function showPosition(position) {
     const WrappedMap = withScriptjs(withGoogleMap(Map));
 
     return (
+        
         <div>
+
             <div style={{ float: "left", height: "80vh", width: "75vw" }}>
+
+             
                 <WrappedMap
                     googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyC2oopGaIUCARgdwcLX02cztRtOG4Vcvwg`}
                     loadingElement={<div style={{ height: "100%" }} />}
@@ -242,6 +275,8 @@ function showPosition(position) {
 </div>  
             </div>
             <div id="demo">
+            {renderOproepen()}
+            
             </div>
         </div>
     );
