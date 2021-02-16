@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, setFiles, useRef, useState } from 'react'
 import { Form, Card, Button, Alert } from 'react-bootstrap'
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useHistory } from "react-router-dom"
@@ -72,11 +72,11 @@ function showPosition(position) {
                 var childData = childSnapshot.val();
                 if(childData.emailadress == currentUser.email){
                     usertest = childData.fullname;
-                    console.log(currentUser);
+                    // console.log(currentUser);
                     sessionStorage.setItem('username', childData.fullname);
                     sessionStorage.setItem('id', currentUser.uid);
                 } else {
-                    console.log("123")
+                    // console.log("123")
                 }
 
             });
@@ -100,7 +100,7 @@ function showPosition(position) {
 
           } else { 
           }
-          console.log(usertest);
+        //   console.log(usertest);
         let newMarker = { action: category_sended, id: currentUser.uid , desc: desc_sended, lat: parseFloat(sessionStorage.getItem('lati')), lng: parseFloat(sessionStorage.getItem('long')), sender: sessionStorage.getItem('username') }
         firebase.database().ref('markers').push(newMarker).then(() => {
 
@@ -114,11 +114,11 @@ function showPosition(position) {
             snapshot.forEach(function (childSnapshot) {
                 var childData = childSnapshot.val();
 
-                console.log(sessionStorage.getItem('username'));
+                // console.log(sessionStorage.getItem('username'));
 
                 document.getElementById("demo").appendChild(table)
                 if(sessionStorage.getItem('username') == childData.sender){
-                    console.log("je hebt een item op jouw naam");
+                    // console.log("je hebt een item op jouw naam");
                     var descs = childData.desc;
                     var sender = childData.sender;
                     let tr = document.createElement("tr");
@@ -135,7 +135,7 @@ function showPosition(position) {
                 }
                 
                 POIOwn.push(childData);
-                console.log(ownitems)
+                // console.log(ownitems)
 
             });
             
@@ -144,6 +144,17 @@ function showPosition(position) {
         return ownitems;
         
 
+    }
+    function postImage(){
+        const storageRef = firebase.storage().ref("/");
+        storageRef.child(`images/pp.jpg`).getDownloadURL()
+        .then((url) => {
+            let avatar = document.createElement("img");
+            avatar.setAttribute('src', url);
+            document.getElementById("demo").appendChild(avatar);
+        })
+
+        
     }
     function makeMarker(e) {
         e.preventDefault()
@@ -166,11 +177,11 @@ function showPosition(position) {
     function Map() {
 
 
-        console.log("test")
-        console.log(data.markers);
-        console.log(JSON.stringify(POIlist));
+        // console.log("test")
+        // console.log(data.markers);
+        // console.log(JSON.stringify(POIlist));
         var list = JSON.parse(sessionStorage.getItem('POIlist'));
-        console.log(list);
+        // console.log(list);
         const [selectedMarker, setSelectedMarker] = useState(null);
         const getFilename = (id) => data.actions[id].filename;
         const getAction = (id) => data.actions[id].action;
@@ -212,6 +223,7 @@ function showPosition(position) {
                         <h2>{getAction(selectedMarker.action)}</h2>
                         <p>{selectedMarker.sender}</p>
                         <p>{selectedMarker.desc}</p>
+                        {postImage()}
                     </div>
                 </InfoWindow>
             )}
